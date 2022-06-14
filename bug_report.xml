@@ -1,1 +1,24 @@
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataTemplate name ="invoiceData" description="Invoice Data" Version="1.0" >
+<parameters>
+<parameter name="p_OrgId" dataType="number" />
+<parameter name="p_VendorId" dataType="number" />
+</parameters>
+<dataQuery>
+<sqlStatement name="Q1">
+<![CDATA[
+SELECT invoice_num,invoice_currency_code,invoice_amount
+  FROM ap_invoices_all
+ WHERE org_id = :p_OrgId
+   AND vendor_id = :p_VendorId
+]]>
+</sqlStatement>
+</dataQuery>
+<dataStructure>
+<group name="G_INV" source="Q1">
+<element name="INV_NUMBER" value="invoice_num" />
+<element name="CURRENCY_CODE" value="invoice_currency_code" />
+<element name="AMOUNT" value="invoice_amount" />
+</group>
+</dataStructure>
+</dataTemplate>
